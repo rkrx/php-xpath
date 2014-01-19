@@ -1,0 +1,14 @@
+<products xmlns="https://github.com/rkrx/php-xpath/products" xmlns:p="https://github.com/rkrx/php-xpath/product">
+	<p:product>
+		<p:name>Testproduct 1</p:name>
+		<p:ref>A001003</p:ref>
+		<p:price>19.99</p:price>
+		<p:stock>144</p:stock>
+	</p:product>
+	<p:product>
+		<p:name>Testproduct 2</p:name>
+		<p:ref>A001005</p:ref>
+		<p:price>29.99</p:price>
+		<p:stock>29</p:stock>
+	</p:product>
+</products>
