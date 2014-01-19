@@ -9,12 +9,12 @@ class DomXPath implements XPath {
 	/**
 	 * @var \DOMDocument
 	 */
-	private $document = null;
+	private $domDocument = null;
 
 	/**
 	 * @var \DOMNode
 	 */
-	private $parent = null;
+	private $parentNode = null;
 
 	/**
 	 * @var \DOMXPath
@@ -54,11 +54,11 @@ class DomXPath implements XPath {
 	 * @param \DOMNode $parent
 	 */
 	public function __construct(\DOMDocument $document, array $namespaces = array(), \DOMNode $parent = null) {
-		$this->document = $document;
+		$this->domDocument = $document;
 		$this->namespaces = $namespaces;
-		$this->parent = $parent;
-		if($this->parent === null) {
-			$this->parent = $this->document->documentElement;
+		$this->parentNode = $parent;
+		if($this->parentNode === null) {
+			$this->parentNode = $this->domDocument->documentElement;
 		}
 		$this->init();
 	}
@@ -68,7 +68,7 @@ class DomXPath implements XPath {
 	 * @return bool
 	 */
 	public function has($xpath) {
-		$list = $this->xp->query($xpath, $this->parent);
+		$list = $this->xp->query($xpath, $this->parentNode);
 		return $list->length > 0;
 	}
 
@@ -77,7 +77,7 @@ class DomXPath implements XPath {
 	 * @return DomXPath[]
 	 */
 	public function getNodes($xpath) {
-		$list = $this->xp->query($xpath, $this->parent);
+		$list = $this->xp->query($xpath, $this->parentNode);
 		$nodeList = new DomNodeList($list, $this);
 		return $nodeList;
 	}
@@ -88,7 +88,7 @@ class DomXPath implements XPath {
 	 * @return string
 	 */
 	public function getValue($xpath = '.', $default = null) {
-		$list = $this->xp->query($xpath, $this->parent);
+		$list = $this->xp->query($xpath, $this->parentNode);
 		if($list->length > 0) {
 			$node = $list->item(0);
 			if($node instanceof \DOMNode) {
@@ -110,20 +110,20 @@ class DomXPath implements XPath {
 	 * @return \DOMDocument
 	 */
 	public function getDomDocument() {
-		return $this->document;
+		return $this->domDocument;
 	}
 
 	/**
 	 * @return \DOMNode
 	 */
 	public function getDomNode() {
-		return $this->parent;
+		return $this->parentNode;
 	}
 
 	/**
 	 */
 	private function init() {
-		$this->xp = new \DOMXPath($this->document);
+		$this->xp = new \DOMXPath($this->domDocument);
 		foreach($this->namespaces as $prefix => $uri) {
 			$this->xp->registerNamespace($prefix, $uri);
 		}
