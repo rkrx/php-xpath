@@ -1,0 +1,19 @@
+{
+    "name": "rkrx/php-xpath",
+    "description": "Human-friendly xpath handling",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "ron",
+            "email": "ron.kirschler@gmail.com"
+        }
+    ],
+    "require": {
+		"rkrx/streams": "1.*"
+    },
+	"autoload": {
+		"psr-0": {
+			"Kir\\XML\\XPath": "src/"
+		}
+	}
+}

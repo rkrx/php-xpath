@@ -1,13 +1,6 @@
-php-xpath
-=========
-
-Human-friendly xpath handling
-
-Example
--------
-
-```PHP
 <?php
+include 'vendor/autoload.php';
+
 use Kir\XML\XPath\DomXPath;
 use Kir\Streams\Impl\StringStream;
 
@@ -39,4 +32,3 @@ foreach($xp->getNodes('//div') as $node) {
 		echo "\t{$subNode->getValue('.')}\n";
 	}
 }
-```
