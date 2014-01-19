@@ -3,7 +3,7 @@ namespace Kir\XML\XPath\DomXPath;
 
 use Kir\XML\XPath\DomXPath;
 
-class DomNodeList implements \Countable, \SeekableIterator {
+class DomNodeList implements \Countable, \SeekableIterator, \ArrayAccess {
 	/**
 	 * @var \DOMNodeList
 	 */
@@ -50,11 +50,7 @@ class DomNodeList implements \Countable, \SeekableIterator {
 	 * @return DomXPath
 	 */
 	public function current() {
-		$node = $this->nodeList->item($this->position);
-		if($node instanceof \DOMNode) {
-			return new DomXPath($this->domDocument, $this->namespaces, $node);
-		}
-		return null;
+		return $this->offsetGet($this->position);
 	}
 
 	/**
@@ -95,5 +91,44 @@ class DomNodeList implements \Countable, \SeekableIterator {
 	 */
 	public function seek($position) {
 		$this->position = $position;
+	}
+
+	/**
+	 * @param int $offset
+	 * @return boolean true on success or false on failure.
+	 */
+	public function offsetExists($offset) {
+		return $offset >= 0 && $offset < $this->nodeList->length;
+	}
+
+	/**
+	 * @param int $offset
+	 * @return mixed Can return all value types.
+	 */
+	public function offsetGet($offset) {
+		$node = $this->nodeList->item($offset);
+		if($node instanceof \DOMNode) {
+			return new DomXPath($this->domDocument, $this->namespaces, $node);
+		}
+		return null;
+	}
+
+	/**
+	 * @param int $offset
+	 * @param mixed $value
+	 * @throws \BadMethodCallException
+	 * @return void
+	 */
+	public function offsetSet($offset, $value) {
+		throw new \BadMethodCallException("Not implemented");
+	}
+
+	/**
+	 * @param int $offset
+	 * @throws \BadMethodCallException
+	 * @return void
+	 */
+	public function offsetUnset($offset) {
+		throw new \BadMethodCallException("Not implemented");
 	}
 }

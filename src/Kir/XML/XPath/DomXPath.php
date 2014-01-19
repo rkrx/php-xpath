@@ -77,9 +77,22 @@ class DomXPath implements XPath {
 	 * @return DomXPath[]
 	 */
 	public function getNodes($xpath) {
-		$list = $this->xp->query($xpath, $this->parentNode);
-		$nodeList = new DomNodeList($list, $this);
+		$nodes = $this->xp->query($xpath, $this->parentNode);
+		$nodeList = new DomNodeList($nodes, $this);
 		return $nodeList;
+	}
+
+	/**
+	 * @param string $xpath
+	 * @throws NodeNotFoundException
+	 * @return XPath
+	 */
+	public function getFirst($xpath = '.') {
+		$nodes = $this->getNodes($xpath);
+		if(count($nodes) > 0) {
+			return $nodes[0];
+		}
+		throw new NodeNotFoundException();
 	}
 
 	/**
@@ -89,12 +102,29 @@ class DomXPath implements XPath {
 	 */
 	public function getValue($xpath = '.', $default = null) {
 		$list = $this->xp->query($xpath, $this->parentNode);
-		if($list->length > 0) {
-			$node = $list->item(0);
+		$result = '';
+		if($list->length < 1) {
+			return $default;
+		}
+		for($i = 0; $i < $list->length; $i++) {
+			$node = $list->item($i);
 			if($node instanceof \DOMNode) {
 				$nodeValue = (string) $node->nodeValue;
-				return $nodeValue;
+				$result .= $nodeValue;
 			}
+		}
+		return $result;
+	}
+
+	/**
+	 * @param string $xpath
+	 * @param null|bool|int|float|string $default
+	 * @return string
+	 */
+	public function getFirstValue($xpath = '.', $default = null) {
+		$nodes = $this->getNodes($xpath);
+		if(count($nodes) > 0) {
+			return $nodes[0]->getValue('.');
 		}
 		return $default;
 	}
