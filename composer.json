@@ -2,6 +2,8 @@
     "name": "rkr/xpath",
     "description": "Human-friendly xpath handling",
     "license": "MIT",
+	"minimum-stability": "dev",
+	"prefer-stable": true,
     "authors": [
         {
             "name": "ron",
