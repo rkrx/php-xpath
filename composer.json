@@ -9,7 +9,7 @@
         }
     ],
     "require": {
-		"rkrx/streams": "1.*"
+		"rkr/streams-common": "dev-master"
     },
 	"require-dev": {
 		"phpunit/phpunit": "3.7.*"
