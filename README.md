@@ -11,8 +11,7 @@ Example 1
 use Kir\XML\XPath\DomXPath;
 use Kir\Streams\Impl\StringStream;
 
-$res = fopen('tests/assets/test.html', 'r');
-$stream = new PhpStream($res);
+$stream = new PhpStream('tests/assets/test.html', 'r');
 $xp = DomXPath::createFromHtmlStream($stream);
 
 php_sapi_name() == 'cli' || print('<pre>');
@@ -33,9 +32,8 @@ Example 2
 use Kir\XML\XPath\DomXPath;
 use Kir\Streams\Impl\PhpStream;
 
-$res = fopen('tests/assets/test.xml', 'r');
-$stream = new PhpStream($res);
-$xp = DomXPath::createFromXmlStream($stream, ['a' => 'https://github.com/rkrx/php-xpath/products', 'b' => 'https://github.com/rkrx/php-xpath/product']);
+$stream = new PhpStream('tests/assets/test.xml', 'r');
+$xp = DomXPath::createFromXmlString($stream, ['a' => 'https://github.com/rkrx/php-xpath/products', 'b' => 'https://github.com/rkrx/php-xpath/product']);
 
 php_sapi_name() == 'cli' || print('<pre>');
 

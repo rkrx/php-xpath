@@ -85,7 +85,7 @@ class DomXPath implements XPath {
 	/**
 	 * @param string $xpath
 	 * @throws NodeNotFoundException
-	 * @return XPath
+	 * @return DomXPath
 	 */
 	public function getFirst($xpath = '.') {
 		$nodes = $this->getNodes($xpath);

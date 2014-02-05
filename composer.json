@@ -1,5 +1,5 @@
 {
-    "name": "rkrx/php-xpath",
+    "name": "rkr/xpath",
     "description": "Human-friendly xpath handling",
     "license": "MIT",
     "authors": [
@@ -9,7 +9,7 @@
         }
     ],
     "require": {
-		"rkr/streams-common": "dev-master"
+		"rkr/streams": "2.*"
     },
 	"require-dev": {
 		"phpunit/phpunit": "3.7.*"
