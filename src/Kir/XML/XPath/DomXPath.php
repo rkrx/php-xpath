@@ -33,7 +33,7 @@ class DomXPath implements XPath {
 	 */
 	static public function createFromHtmlStream(InputStream $stream, array $namespaces = array()) {
 		$doc = new \DOMDocument();
-		@$doc->loadHTML($stream->readAll());
+		@$doc->loadHTML($stream->read());
 		return new static($doc, $namespaces);
 	}
 
@@ -44,7 +44,7 @@ class DomXPath implements XPath {
 	 */
 	static public function createFromXmlStream(InputStream $stream, array $namespaces = array()) {
 		$doc = new \DOMDocument();
-		$doc->loadXML($stream->readAll());
+		$doc->loadXML($stream->read());
 		return new static($doc, $namespaces);
 	}
 

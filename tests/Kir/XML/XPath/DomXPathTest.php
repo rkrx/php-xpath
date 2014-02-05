@@ -1,7 +1,7 @@
 <?php
 namespace Kir\XML\XPath;
 
-use Kir\Streams\Impl\PhpStream;
+use Kir\Streams\Common\PhpStream;
 
 class DomXPathTest extends \PHPUnit_Framework_TestCase {
 	/**
@@ -54,7 +54,8 @@ class DomXPathTest extends \PHPUnit_Framework_TestCase {
 	 * @return DomXPath
 	 */
 	private function createFromXml($filename) {
-		$stream = new PhpStream(fopen($filename, 'r'));
+		$stream = new PhpStream($filename, 'r');
+		$stream->open();
 		return DomXPath::createFromXmlStream($stream);
 	}
 
@@ -63,7 +64,8 @@ class DomXPathTest extends \PHPUnit_Framework_TestCase {
 	 * @return DomXPath
 	 */
 	private function createFromHtml($filename) {
-		$stream = new PhpStream(fopen($filename, 'r'));
+		$stream = new PhpStream($filename, 'r');
+		$stream->open();
 		return DomXPath::createFromHtmlStream($stream);
 	}
 }
