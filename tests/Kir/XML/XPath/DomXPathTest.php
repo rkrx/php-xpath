@@ -54,8 +54,7 @@ class DomXPathTest extends \PHPUnit_Framework_TestCase {
 	 * @return DomXPath
 	 */
 	private function createFromXml($filename) {
-		$stream = new PhpStream($filename, 'r');
-		$stream->open();
+		$stream = new PhpStream($filename, 'r', true);
 		return DomXPath::createFromXmlStream($stream);
 	}
 
@@ -64,8 +63,7 @@ class DomXPathTest extends \PHPUnit_Framework_TestCase {
 	 * @return DomXPath
 	 */
 	private function createFromHtml($filename) {
-		$stream = new PhpStream($filename, 'r');
-		$stream->open();
+		$stream = new PhpStream($filename, 'r', true);
 		return DomXPath::createFromHtmlStream($stream);
 	}
 }

@@ -4,12 +4,10 @@
     "license": "MIT",
 	"minimum-stability": "dev",
 	"prefer-stable": true,
-    "authors": [
-        {
-            "name": "ron",
-            "email": "ron.kirschler@gmail.com"
-        }
-    ],
+    "authors": [{
+		"name": "ron",
+		"email": "ron.kirschler@gmail.com"
+	}],
     "require": {
 		"rkr/streams-common": "dev-master"
     },
