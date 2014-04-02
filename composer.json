@@ -9,7 +9,7 @@
 		"email": "ron.kirschler@gmail.com"
 	}],
     "require": {
-		"rkr/streams-common": "dev-master"
+		"rkr/streams": "0.0.1"
     },
 	"require-dev": {
 		"phpunit/phpunit": "3.7.*"

@@ -27,13 +27,33 @@ class DomXPath implements XPath {
 	private $namespaces = null;
 
 	/**
+	 * @param string $input
+	 * @param array $namespaces
+	 * @return static
+	 */
+	static public function createFromHtml($input, array $namespaces = array()) {
+		$doc = new \DOMDocument();
+		@$doc->loadHTML($input);
+		return new static($doc, $namespaces);
+	}
+
+	/**
 	 * @param InputStream $stream
 	 * @param array $namespaces
 	 * @return static
 	 */
 	static public function createFromHtmlStream(InputStream $stream, array $namespaces = array()) {
+		return self::createFromHtml($stream->read(), $namespaces);
+	}
+
+	/**
+	 * @param string $input
+	 * @param array $namespaces
+	 * @return static
+	 */
+	static public function createFromXml($input, array $namespaces = array()) {
 		$doc = new \DOMDocument();
-		@$doc->loadHTML($stream->read());
+		$doc->loadXML($input);
 		return new static($doc, $namespaces);
 	}
 
@@ -43,9 +63,7 @@ class DomXPath implements XPath {
 	 * @return static
 	 */
 	static public function createFromXmlStream(InputStream $stream, array $namespaces = array()) {
-		$doc = new \DOMDocument();
-		$doc->loadXML($stream->read());
-		return new static($doc, $namespaces);
+		return self::createFromXml($stream->read(), $namespaces);
 	}
 
 	/**
