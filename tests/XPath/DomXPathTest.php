@@ -48,6 +48,24 @@ class DomXPathTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/**
+	 */
+	public function testMap() {
+		$xp = $this->createFromHtml('tests/assets/test.html');
+		$map = array(
+			'a' => '//body/div[@title="1"]/a[1]/text()',
+			'b' => '//body/div[@title="1"]/a[2]/text()',
+			'c' => '//body/div[@title="1"]/a[3]/text()',
+			'd' => '//body/div[@title="2"]/a[1]/text()',
+		);
+		$values = $xp->map($map);
+
+		$this->assertEquals('a', $values['a']);
+		$this->assertEquals('b', $values['b']);
+		$this->assertEquals('c', $values['c']);
+		$this->assertEquals('d', $values['d']);
+	}
+
+	/**
 	 * @param string $filename
 	 * @return DomXPath
 	 */

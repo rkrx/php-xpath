@@ -6,7 +6,7 @@
 		 timeoutForSmallTests="5">
 	<testsuites>
 		<testsuite name="Streams">
-			<file>tests/Kir/XML/XPath/DomXPathTest.php</file>
+			<file>tests/XPath/DomXPathTest.php</file>
 		</testsuite>
 	</testsuites>
 </phpunit>
