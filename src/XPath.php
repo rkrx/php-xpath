@@ -36,4 +36,10 @@ interface XPath {
 	 * @return string
 	 */
 	public function getFirstValue($xpath = '.', $default = null);
+
+	/**
+	 * @param array $keyValueArray
+	 * @return array
+	 */
+	public function map($keyValueArray);
 }

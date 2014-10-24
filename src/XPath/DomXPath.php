@@ -148,6 +148,18 @@ class DomXPath implements XPath {
 	}
 
 	/**
+	 * @param array $keyValueArray
+	 * @return array
+	 */
+	public function map($keyValueArray) {
+		$result = array();
+		foreach($keyValueArray as $key => $xpath) {
+			$result[$key] = $this->getFirstValue($xpath);
+		}
+		return $result;
+	}
+
+	/**
 	 * @return string[]
 	 */
 	public function getNamespaces() {

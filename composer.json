@@ -15,8 +15,13 @@
 		"phpunit/phpunit": "3.7.*"
 	},
 	"autoload": {
-		"psr-0": {
-			"Kir\\XML\\XPath": "src/"
+		"psr-4": {
+			"Kir\\XML\\": "src/"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Kir\\XML\\": ["src/", "tests/"]
 		}
 	}
 }
