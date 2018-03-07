@@ -1,29 +1,19 @@
 <?php
 namespace Kir\XML\XPath;
 
+use Kir\Streams\Exceptions\IOException;
 use Kir\Streams\InputStream;
 use Kir\XML\XPath;
 use Kir\XML\XPath\DomXPath\DomNodeList;
 
 class DomXPath implements XPath {
-	/**
-	 * @var \DOMDocument
-	 */
+	/** @var \DOMDocument */
 	private $domDocument = null;
-
-	/**
-	 * @var \DOMNode
-	 */
+	/** @var \DOMNode */
 	private $parentNode = null;
-
-	/**
-	 * @var \DOMXPath
-	 */
+	/** @var \DOMXPath */
 	private $xp = null;
-
-	/**
-	 * @var string[]
-	 */
+	/** @var string[] */
 	private $namespaces = null;
 
 	/**
@@ -36,11 +26,12 @@ class DomXPath implements XPath {
 		@$doc->loadHTML($input);
 		return new static($doc, $namespaces);
 	}
-
+	
 	/**
 	 * @param InputStream $stream
 	 * @param array $namespaces
 	 * @return static
+	 * @throws IOException
 	 */
 	static public function createFromHtmlStream(InputStream $stream, array $namespaces = array()) {
 		return self::createFromHtml($stream->read(), $namespaces);
@@ -56,11 +47,12 @@ class DomXPath implements XPath {
 		$doc->loadXML($input);
 		return new static($doc, $namespaces);
 	}
-
+	
 	/**
 	 * @param InputStream $stream
 	 * @param array $namespaces
 	 * @return static
+	 * @throws IOException
 	 */
 	static public function createFromXmlStream(InputStream $stream, array $namespaces = array()) {
 		return self::createFromXml($stream->read(), $namespaces);
@@ -92,7 +84,7 @@ class DomXPath implements XPath {
 
 	/**
 	 * @param string $xpath
-	 * @return DomXPath[]
+	 * @return DomXPath[]|DomNodeList
 	 */
 	public function getNodes($xpath) {
 		$nodes = $this->xp->query($xpath, $this->parentNode);
@@ -116,7 +108,7 @@ class DomXPath implements XPath {
 	/**
 	 * @param string $xpath
 	 * @param null|bool|int|float|string $default
-	 * @return string
+	 * @return null|bool|int|float|string
 	 */
 	public function getValue($xpath = '.', $default = null) {
 		$list = $this->xp->query($xpath, $this->parentNode);
@@ -127,8 +119,9 @@ class DomXPath implements XPath {
 		for($i = 0; $i < $list->length; $i++) {
 			$node = $list->item($i);
 			if($node instanceof \DOMNode) {
-				$nodeValue = (string) $node->nodeValue;
-				$result .= $nodeValue;
+				/** @var string|null $nodeValue */
+				$nodeValue = $node->nodeValue;
+				$result .= (string) $nodeValue;
 			}
 		}
 		return $result;
@@ -137,7 +130,7 @@ class DomXPath implements XPath {
 	/**
 	 * @param string $xpath
 	 * @param null|bool|int|float|string $default
-	 * @return string
+	 * @return null|bool|int|float|string
 	 */
 	public function getFirstValue($xpath = '.', $default = null) {
 		$nodes = $this->getNodes($xpath);

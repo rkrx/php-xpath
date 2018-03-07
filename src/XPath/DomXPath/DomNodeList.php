@@ -4,39 +4,22 @@ namespace Kir\XML\XPath\DomXPath;
 use Kir\XML\XPath\DomXPath;
 
 class DomNodeList implements \Countable, \SeekableIterator, \ArrayAccess {
-	/**
-	 * @var \DOMNodeList
-	 */
+	/** @var \DOMNodeList */
 	private $nodeList = null;
-
-	/**
-	 * @var DomXPath
-	 */
+	/** @var DomXPath */
 	private $parent = null;
-
-	/**
-	 * @var int
-	 */
+	/** @var int */
 	private $position = 0;
-
-	/**
-	 * @var
-	 */
+	/** @var string[] */
 	private $namespaces = array();
-
-	/**
-	 * @var \DOMDocument
-	 */
+	/** @var \DOMDocument */
 	private $domDocument = null;
-
-	/**
-	 * @var \DOMNode
-	 */
+	/** @var \DOMNode */
 	private $domNode = null;
 
 	/**
 	 * @param \DOMNodeList $nodeList
-	 * @param \Kir\XML\XPath\DomXPath $parent
+	 * @param DomXPath $parent
 	 */
 	public function __construct(\DOMNodeList $nodeList, DomXPath $parent) {
 		$this->nodeList = $nodeList;
