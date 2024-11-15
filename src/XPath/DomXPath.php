@@ -63,7 +63,7 @@ class DomXPath implements XPath {
 	 * @param array $namespaces
 	 * @param \DOMNode $parent
 	 */
-	public function __construct(\DOMDocument $document, array $namespaces = array(), \DOMNode $parent = null) {
+	public function __construct(\DOMDocument $document, array $namespaces = array(), ?\DOMNode $parent = null) {
 		$this->domDocument = $document;
 		$this->namespaces = $namespaces;
 		$this->parentNode = $parent;
